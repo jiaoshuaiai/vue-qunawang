@@ -1,4 +1,4 @@
-# qunawang
+# vue-qunawang
 
 > A Vue.js project
 
