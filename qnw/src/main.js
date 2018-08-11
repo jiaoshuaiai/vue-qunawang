@@ -7,7 +7,9 @@ import fastClick from 'fastclick'
 
 
 
-import './assets/styles/reset.css'
+import '@/assets/styles/reset.css'
+import './assets/styles/1px.less'
+import 'styles/iconfont.css'
 
 Vue.config.productionTip = false
 fastClick.attach(document.body);     //将fastClick 自带的方法绑定到body中
