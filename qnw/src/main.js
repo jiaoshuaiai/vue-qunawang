@@ -4,16 +4,18 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
-
+import VueAwesomeSwiper from 'vue-awesome-swiper'   //swiprer 插件
 
 
 import '@/assets/styles/reset.css'
 import './assets/styles/1px.less'
 import 'styles/iconfont.css'
+import 'swiper/dist/css/swiper.css'
 
 Vue.config.productionTip = false
 fastClick.attach(document.body);     //将fastClick 自带的方法绑定到body中
 
+Vue.use(VueAwesomeSwiper)
 
 
 
