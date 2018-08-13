@@ -34,15 +34,18 @@
                    {
                     id:'1',
                     imgUrl:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3395251310,758981983&fm=27&gp=0.jpg'
-                   },{
+                   },
+                    {
                     id:'2',
-                    imgUrl:require('../assets/su/2.jpg')
-                   },{
+                    imgUrl:require('../../assets/su/2.jpg')
+                   },
+                    {
                     id:'3',
-                    imgUrl:require('../assets/su/3.jpg')
-                   },{
+                    imgUrl:require('../../assets/su/3.jpg')
+                   },
+                    {
                     id:'4',
-                    imgUrl:require('../assets/su/4.jpg')
+                    imgUrl:require('../../assets/su/4.jpg')
                    }
                 ]
             }
