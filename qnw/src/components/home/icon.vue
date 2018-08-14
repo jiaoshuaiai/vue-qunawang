@@ -1,19 +1,35 @@
+
+<!--先实现九宫格，然后希望可以根据图标的数量进行滑动。（超过8个）.图标数量用computed 计算属性进行了处理-->
+
 <template>
     <div>
         <ul class="icons">
+            <swiper :options="swiperOption" >
+                <swiper-slide v-for="(page,index) in pages" :key="index">
 
-            <!--<li class="icon">-->
-                <!--<div class="icon-img">-->
-                    <!--<img class="icon-imgContent" src="@/assets/icon/1.png" alt="">-->
-                <!--</div>-->
-            <!--<p class="icon-text">aaaa</p>-->
-            <!--</li>-->
-            <li class="icon" v-for="item in list" :key="item.key">
-                <div class="icon-img">
-                    <img class="icon-imgContent"  :src="item.imgUrl" alt="">
-                </div>
-                <p class="icon-text" v-text="item.name"></p>
-            </li>
+                    <li class="icon" v-for="item in page" :key="item.key">
+                        <div class="icon-img">
+                            <img class="icon-imgContent"  :src="item.imgUrl" alt="">
+                        </div>
+                        <p class="icon-text" v-text="item.name"></p>
+                    </li>
+                </swiper-slide>
+                <!--<swiper-slide>-->
+                    <!--<li class="icon" >-->
+                        <!--<div class="icon-img">-->
+                            <!--<img class="icon-imgContent"  src="../../assets/icon/8.png" alt="">-->
+                        <!--</div>-->
+                        <!--<p class="icon-text" >2222</p>-->
+                    <!--</li>-->
+                <!--</swiper-slide>-->
+
+                <!--<div class="swiper-pagination"  slot="pagination"></div>-->
+
+                <!-- <build:js /js/jquery.min.js -->
+                <!--<script type="text/javascript" src="/js/jquery.js"></script>-->
+                <!-- /build> -->
+
+            </swiper>
 
         </ul>
     </div>
@@ -23,9 +39,16 @@ export default {
     name:'icon',
     data () {
         return {
+            swiperOption: {
+                // some swiper options/callbacks
+                // 所有的参数同 swiper 官方 api 参数
+                // ...
+//                pagination: '.icons .swiper-pagination',   //圆点
+//                loop: true      //循环轮播
+            },
             list:[
                 {
-                    name:'景点门票',
+                    name:'景点门票秦莞尔阿斯蒂芬阿斯蒂芬',
                     imgUrl:require('../../assets/icon/1.png'),
                     key:'0'
                 },
@@ -58,14 +81,36 @@ export default {
                     name:'全部',
                     imgUrl:require('../../assets/icon/7.png'),
                     key:'7'
+                },{
+                    name:'酒瓶',
+                    imgUrl:require('../../assets/icon/8.png'),
+                    key:'8'
                 }
              ]
+        }
+    },
+    computed:{    //计算属性，处理数据
+        pages(){     //将数据以8个为单位分割。超过8个，分为两个数组
+            const pages = [];
+            this.list.forEach((value,index) =>{
+                const page = Math.floor(index / 8);
+//            console.log(page)
+//            console.log(pages[page])
+               if(!pages[page]){   //新数组项为undefined,给其默认值
+                   pages[page] = []
+               }
+                pages[page].push(value);
+            })
+            //            console.log(pages)
+            return pages
         }
     }
 
 }
 </script>
 <style lang="stylus" scoped>
+    @import '~styles/textOverflow.styl'
+
    /*外层宽高比为2*/
    .icons
     overflow: hidden
@@ -96,5 +141,6 @@ export default {
       .icon-text
        margin-top: 8rem
        text-align:center
+       ellipsis()
 
 </style>

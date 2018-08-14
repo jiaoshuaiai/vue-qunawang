@@ -27,7 +27,7 @@
                     // some swiper options/callbacks
                     // 所有的参数同 swiper 官方 api 参数
                     // ...
-                    pagination: '.swiper-pagination',   //圆点
+                    pagination: '.wrapper .swiper-pagination',   //圆点   当一个页面出现多个swiper 时，通过前面添加类名的形式进行区分，避免冲突
                     loop: true      //循环轮播
                 },
                 swiperList:[
@@ -48,11 +48,6 @@
                     imgUrl:require('../../assets/su/4.jpg')
                    }
                 ]
-            }
-        },
-        methods:{
-            callback(){
-                console.log('回调')
             }
         }
     }
