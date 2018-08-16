@@ -1,6 +1,8 @@
 
 <!--先实现九宫格，然后希望可以根据图标的数量进行滑动。（超过8个）.图标数量用computed 计算属性进行了处理-->
 
+<!--3-->
+
 <template>
     <div>
         <ul class="icons">
@@ -24,11 +26,6 @@
                 <!--</swiper-slide>-->
 
                 <!--<div class="swiper-pagination"  slot="pagination"></div>-->
-
-                <!-- <build:js /js/jquery.min.js -->
-                <!--<script type="text/javascript" src="/js/jquery.js"></script>-->
-                <!-- /build> -->
-
             </swiper>
 
         </ul>
@@ -45,7 +42,8 @@ export default {
                 // ...
 //                pagination: '.icons .swiper-pagination',   //圆点
 //                loop: true      //循环轮播
-            },
+                autoplay: false
+            }/*,
             list:[
                 {
                     name:'景点门票秦莞尔阿斯蒂芬阿斯蒂芬',
@@ -86,23 +84,26 @@ export default {
                     imgUrl:require('../../assets/icon/8.png'),
                     key:'8'
                 }
-             ]
+            ]*/
         }
     },
     computed:{    //计算属性，处理数据
         pages(){     //将数据以8个为单位分割。超过8个，分为两个数组
             const pages = [];
-            this.list.forEach((value,index) =>{
+//            this.list.forEach((value,index) =>{    //本地数据
+            this.iconList.forEach((value,index) =>{   //JSON
                 const page = Math.floor(index / 8);
-//            console.log(page)
-//            console.log(pages[page])
                if(!pages[page]){   //新数组项为undefined,给其默认值
                    pages[page] = []
                }
                 pages[page].push(value);
             })
-            //            console.log(pages)
             return pages
+        }
+    },
+    props:{
+        iconList:{
+            type:Array
         }
     }
 
@@ -116,6 +117,7 @@ export default {
     overflow: hidden
     height:0
     padding-bottom: 50%
+    margin-top: 1.04rem
     /*background: red*/
      /*内层宽高比为 1*/
     .icon
@@ -139,8 +141,15 @@ export default {
         display: block
         margin: 0 auto
       .icon-text
-       margin-top: 8rem
+       /*margin-top: 8rem  隐藏两个，新增5个。明天解决*/
        text-align:center
+       position: absolute
+       left: 0
+       right: 0
+       bottom: 0
+       height: 1.5rem
+
        ellipsis()
+
 
 </style>

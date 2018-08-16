@@ -1,7 +1,10 @@
+<!--2-->
+
 <template>
     <div class="wrapper">
         <!--ref="mySwiper" @someSwiperEvent="callback"-->
-        <swiper :options="swiperOption" >
+        <!--之所以添加v-if,是因为初始swiper 渲染的时候，swiper是一个空数组，这样当数据接收到时，就会显示出最后一张图。添加if 判断，等到数组有值的时候，在进行swiper渲染。就可以解决了-->
+        <swiper :options="swiperOption" v-if="swiperList.length">
             <!-- slides -->
             <swiper-slide v-for="item in swiperList" :key="item.id">
                 <img :src="item.imgUrl" alt="">
@@ -29,8 +32,8 @@
                     // ...
                     pagination: '.wrapper .swiper-pagination',   //圆点   当一个页面出现多个swiper 时，通过前面添加类名的形式进行区分，避免冲突
                     loop: true      //循环轮播
-                },
-                swiperList:[
+                }/*,
+                swiperList:[   使用JSON
                    {
                     id:'1',
                     imgUrl:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3395251310,758981983&fm=27&gp=0.jpg'
@@ -47,9 +50,17 @@
                     id:'4',
                     imgUrl:require('../../assets/su/4.jpg')
                    }
-                ]
+                ]*/
             }
+        },
+        props:{
+//            swiperList:{   //指定接收类型
+//                type:Array
+//            }
+            swiperList:Array   //指定接收类型
         }
+//       props:['swiperList']
+
     }
 </script>
 <style lang="stylus" scoped>

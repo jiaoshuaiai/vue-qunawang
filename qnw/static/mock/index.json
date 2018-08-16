@@ -1,0 +1,126 @@
+{
+  "status": "success",
+  "swiperList": [
+    {
+    "id": "1",
+    "imgUrl": "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3395251310,758981983&fm=27&gp=0.jpg"
+    },
+    {
+      "id": "2",
+      "imgUrl": "../../../static/img/2.jpg"
+    },
+    {
+      "id": "3",
+      "imgUrl": "../../../static/img/3.jpg"
+    },
+    {
+      "id": "4",
+      "imgUrl": "../../../static/img/4.jpg"
+    }
+  ],
+  "iconList": [
+    {
+    "key": "0",
+    "imgUrl": "../../../static/icon/1.png",
+    "name": "景点门票秦莞尔阿斯蒂芬阿斯蒂芬"
+    },
+    {
+    "key": "1",
+    "imgUrl": "../../../static/icon/2.png",
+    "name": "泡温泉"
+    },
+    {
+    "key": "2",
+    "imgUrl": "../../../static/icon/3.png",
+    "name": "分界洲岛"
+    },
+    {
+    "key": "3",
+    "imgUrl": "../../../static/icon/4.png",
+    "name": "一日游"
+    },
+    {
+    "key": "4",
+    "imgUrl": "../../../static/icon/5.png",
+    "name": "必游清单"
+    },
+    {
+    "key": "5",
+    "imgUrl": "../../../static/icon/6.png",
+    "name": "大小洞天"
+    },
+    {
+    "key": "6",
+    "imgUrl": "../../../static/icon/7.png",
+    "name": "自然风光"
+    },
+    {
+    "key": "7",
+    "imgUrl": "../../../static/icon/8.png",
+    "name": "全部"
+    },
+    {
+    "key": "8",
+    "imgUrl": "../../../static/icon/9.png",
+    "name": "酒瓶"
+    }
+  ],
+  "sellList": [
+    {
+    "id": "1",
+    "imgUrl": "../../../static/img/5.jpg",
+    "title": "大连圣亚海洋世界",
+    "content": "浪漫大连首站，浪漫的海洋主题乐园",
+      "price":"99"
+    },
+    {
+    "id": "2",
+    "imgUrl": "../../../static/img/6.jpg",
+    "title": "大连圣亚海洋世界",
+    "content": "浪漫大连首站，浪漫的海洋主题乐园",
+      "price":"99"
+    },
+    {
+    "id": "3",
+    "imgUrl": "../../../static/img/7.jpg",
+    "title": "大连圣亚海洋世界",
+    "content": "浪漫大连首站，浪漫的海洋主题乐园",
+      "price":"99"
+    },
+    {
+    "id": "4",
+    "imgUrl": "../../../static/img/8.jpg",
+    "title": "大连圣亚海洋世界",
+    "content": "浪漫大连首站，浪漫的海洋主题乐园",
+      "price":"99"
+    },
+    {
+    "id": "5",
+    "imgUrl": "../../../static/img/9.jpg",
+    "title": "大连圣亚海洋世界大连圣亚海洋世界大连圣亚海洋世界大连圣亚海洋世界大连圣亚海洋世界大连圣亚海洋世界大连圣亚海洋世界大连圣亚海洋世界大连圣亚海洋世界",
+    "content": "浪漫大连首站，浪漫的海洋主题乐园浪漫的海洋主题乐园浪漫的海洋主题乐园浪漫的海洋主题乐园浪漫的海洋主题乐园浪漫的海洋主题乐园浪漫的海洋主题乐园浪漫的海洋主题乐园",
+      "price":"99"
+    }
+
+  ],
+  "weekendList": [
+    {
+    "id": "1",
+    "imgUrl": "https://inews.gtimg.com/newsapp_match/0/4819230610/0",
+    "title": "温泉有水上乐园",
+    "content": "泡泡温泉，吹吹海风，深觉人生美好"
+    },
+    {
+      "id": "2",
+      "imgUrl": "../../../static/img/3.jpg",
+      "title": "温泉有水上乐园",
+      "content": "泡泡温泉，吹吹海风，深觉人生美好"
+    },
+    {
+      "id": "3",
+      "imgUrl": "../../../static/img/9.jpg",
+      "title": "温泉有水上乐园",
+      "content": "泡泡温泉，吹吹海风，深觉人生美好"
+    }
+  ]
+}
