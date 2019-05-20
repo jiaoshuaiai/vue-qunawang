@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/api': {
-            target: 'http://localhost:8085',
+            target: 'http://localhost:8076',//本地地址，target端口号 要与port 相同，如果参考其他项目中的target- IP端口与port 不一致，会导致pathRewrite  无效,然后 读取 JSON时  api 无法使用。
+            // changeOrigin: true,    //读取本地JSON 时不加没影响
             pathRewrite: {
                 '^/api': '/static/mock'
             }
@@ -21,7 +22,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8085, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8076, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

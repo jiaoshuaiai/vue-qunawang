@@ -11,7 +11,7 @@
                 <img class="li-img" :src="item.imgUrl" alt="">
                 <div class="li-content">
                     <h5 class="h5" v-text="item.title"></h5>
-                    <h6 class="h6" style="color: rgba(51, 51, 51, 0.74);" v-text="item.content"></h6>
+                    <h6 class="h6" style="color: rgba(51, 51, 51, 0.5);" v-text="item.content"></h6>
                     <p class="price">
                         <strong style="color: red;font-size: 1.1rem;" v-text="item.price"></strong>
                         起
@@ -85,12 +85,12 @@
 </script>
 <style lang="stylus" scoped>
     @import '~styles/varibles.styl'
-    @import "~styles/textOverflow.styl"
+    @import "~styles/shareFun.styl"
    .hint
     display: flex
     text-align: center
     line-height: 3rem
-    background: $bgColor
+    background: #8bc34a
     .p1,.p2
      flex: 1
     .p1
@@ -104,8 +104,8 @@
     padding:  .5rem .5rem .5rem 0
     /*border-bottom: 0.005rem solid #e6e6e6*/
     .li-img
-      width: 5rem
-      height: 4rem
+      width: 9rem
+      height: 6rem
     .li-content
      flex: 1
      margin-left: .5rem
@@ -114,7 +114,14 @@
      overflow: hidden
      .h5,.h6
       margin-bottom: .5rem
+      font-weight: 500
       ellipsis()
+    .h5
+     font-size: 1.6rem
+     padding-top: 0.2rem
+     padding-bottom: 0.2rem
+    .h6
+     font-size: 1.3rem
    .link
      display: inline-block
      line-height: 2.4rem

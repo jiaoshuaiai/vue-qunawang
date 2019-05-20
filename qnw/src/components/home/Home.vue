@@ -1,5 +1,5 @@
 <template>
-    <div class="d">
+    <div class="div">
         <Header></Header>
         <Swiper :swiperList="swiperList"></Swiper>
         <Icon :iconList="iconList"></Icon>
@@ -12,11 +12,11 @@
     </div>
 </template>
 <script>
-    import Header from './header'
-    import Swiper from './swiper'
-    import Icon from './icon'
-    import Sell from './sell'
-    import Weekend from './weekend'
+    import Header from './child/Header'
+    import Swiper from './child/Swiper'
+    import Icon from './child/Icon'
+    import Sell from './child/Sell'
+    import Weekend from './child/Weekend'
     import axios from 'axios'
     export default {
         name:'Home',
@@ -51,18 +51,13 @@
                      console.log(self.img + '---')
                  })*/
 
-                axios.get('/api/index.json').then( (reqsuccess) =>{  //箭头函数this指向是最近的this
-                        console.log(reqsuccess)
+                axios.get('/api/index.json').then((reqsuccess) =>{  //箭头函数this指向是最近的this
+//                        console.log(reqsuccess)
                     this.img = reqsuccess.data.swiperList[1].imgUrl
                     this.swiperList = reqsuccess.data.swiperList
                     this.iconList = reqsuccess.data.iconList
                     this.sellList = reqsuccess.data.sellList
                     this.weekendList = reqsuccess.data.weekendList
-                    console.log(this.img)
-                    console.log(this.swiperList)
-                    console.log(this.iconList)
-                    console.log(this.sellList)
-                    console.log(this.weekendList)
                 })
 
 //                axios.get('/api/index.json').then(this.abc)  //两种方式获取json  this指向问题
@@ -81,7 +76,8 @@
     }
 </script>
 <style scoped>
-  .d{
-      margin-bottom: 100rem
+  .div{
+      margin-bottom: 100rem;
+      font-size :1.5rem !important;
   }
 </style>

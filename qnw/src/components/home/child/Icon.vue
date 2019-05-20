@@ -110,7 +110,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-    @import '~styles/textOverflow.styl'
+    @import '~styles/shareFun.styl'
 
    /*外层宽高比为2*/
    .icons
@@ -142,12 +142,13 @@ export default {
         margin: 0 auto
       .icon-text
        /*margin-top: 8rem  隐藏两个，新增5个。明天解决*/
-       text-align:center
+       center()
        position: absolute
        left: 0
        right: 0
        bottom: 0
        height: 1.5rem
+       color:#000000c4
 
        ellipsis()
 

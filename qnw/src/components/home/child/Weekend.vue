@@ -46,18 +46,23 @@
     }
 </script>
 <style lang="stylus" scoped>
-    @import "~styles/textOverflow.styl"
+    @import "~styles/shareFun.styl"
     h3
      hTitle()
     .li-img
      width:100%
-     height:20vw
+     height:50vw
     .li-content
      margin: .8rem
      .li-h5
+      font-size: 1.6rem
+      font-weight: 500
+      padding-top: 0.2rem
+      padding-bottom: 0.2rem
       ellipsis()
      .li-p
       margin: .5rem 0
+      color: rgba(51, 51, 51, 0.5)
       ellipsis()
 
 

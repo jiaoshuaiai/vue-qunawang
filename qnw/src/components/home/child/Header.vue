@@ -1,21 +1,21 @@
 
-<!--1-->
 
 <template>
     <div>
-        <!--<header class="vux-1px" >-->
         <header>
             <p class="header-left">
-                <span class="iconfont">&#xe624;</span></p>
-            <p class="header-input" >
-                <!--<input type="text" placeholder="输入城市/景点/游玩主题">-->
+                <span class="iconfont" style="font-size: 2rem">&#xe624;</span></p>
+            <p class="header-input">
                 <span class="iconfont">&#xe632; </span>
-                <span @click="search" v-text="placeholder"></span>
+
+                <input id="input" style="border: none;outline: none" type="text" placeholder="输入城市/景点/游玩主题">
             </p>
-            <p class="header-select">
-                城市
-                <span class="iconfont arrow-icon">&#xe6aa;</span>
-            </p>
+            <router-link :to="{path:'/city',query:{city:city}}">
+                <p class="header-select">
+                    {{city}}
+                    <span class="iconfont arrow-icon">&#xe6aa;</span>
+                </p>
+            </router-link>
         </header>
     </div>
 </template>
@@ -24,12 +24,12 @@
         name:'HomeHeader',
         data(){
             return{
-                placeholder:'输入城市/景点/游玩主题'
+                city:this.$route.query.city ? this.$route.query.city : '城市'
             }
         },
         methods:{
              search(){
-                 this.placeholder = ''
+//                 this.placeholder = ''
              }
         }
     }
@@ -61,20 +61,21 @@
       background: #fff
       border-radius: .3rem
       color: #9e9e9e
-      padding: .2rem .2rem .2rem .8rem
+      padding: .8rem .2rem .8rem .8rem
      .header-input span
       font-size: 1.2rem
      .header-select
       width: 6rem
       float:right
       text-align: center
+      color: #fff
       .arrow-icon
         margin-left: -0.4rem
-     /*input*/
-      /*width: 100%*/
-      /*border: none*/
-      /*border-radius: .3rem*/
-      /*padding: .2rem*/
+      /*input
+        width: 100%
+        border: none
+        border-radius: .3rem
+        padding: .2rem*/
 
 
 
