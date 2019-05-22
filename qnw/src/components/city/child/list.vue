@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <main>
+  <div class="list" ref="wrapper">
+    <main class="content">
       <section>
         <p class="headerCity">当前城市</p>
         <div class="labelDiv">
@@ -10,75 +10,85 @@
       <section>
         <p class="headerCity">热门城市</p>
         <div class="labelDiv">
-          <p v-for="(item,index) in hotList" :key="index"
+          <p v-for="(item,index) in hotCity" :key="index"
              class="labelP"
-             @click="back(item)">
-            {{item}}
+             @click="back(item.name)">
+            {{item.name}}
           </p>
         </div>
       </section>
-      <section >
-        <p class="headerCity">A</p>
-        <div class="labelDiv1">
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海666</p>
-          <p class="labelP1">上海</p>
-          <p class="labelP1">上海</p>
+      <section>
+        <div class="area" v-for="(item,index) in cityList" :key="index">
+          <p  class="headerCity">{{item.alphabet}}</p>
+          <div class="labelDiv1">
+            <p class="labelP1" v-for="it in item.data">{{it.name}}</p>
+          </div>
         </div>
-
-
-        <p class="headerCity">B</p>
-        <div class="labelDiv1">
-          <p class="labelP1">北京</p>
-          <p class="labelP1">北京</p>
-          <p class="labelP1">北京</p>
-          <p class="labelP1">北京</p>
-          <p class="labelP1">北京</p>
-          <p class="labelP1">北京</p>
-          <p class="labelP1">北京</p>
-          <p class="labelP1">北京</p>
-          <p class="labelP1">北京</p>
+        <!--<div class="area">
+          <p class="headerCity">A</p>
+          <div class="labelDiv1">
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海666</p>
+            <p class="labelP1">上海</p>
+            <p class="labelP1">上海</p>
+          </div>
         </div>
-
+        <div class="area">
+          <p class="headerCity">B</p>
+          <div class="labelDiv1">
+            <p class="labelP1">北京</p>
+            <p class="labelP1">北京</p>
+            <p class="labelP1">北京</p>
+            <p class="labelP1">北京</p>
+            <p class="labelP1">北京</p>
+            <p class="labelP1">北京</p>
+            <p class="labelP1">北京</p>
+            <p class="labelP1">北京</p>
+            <p class="labelP1">北京</p>
+          </div>
+        </div>-->
 
       </section>
+
     </main>
   </div>
 </template>
 <script>
+    import BScroll from 'better-scroll'
     export default{
       name:'list',
       data(){
         return{
           city: this.$route.query.city ? this.$route.query.city :  '',
-          hotList: ['上海1','北京','广州','深圳','郑州','武汉']
-
         }
       },
-      props:['searchCity'],
+      props:{
+        searchCity: String,
+        hotCity: Array,
+        cityList: Array
+      },
+//      props:['searchCity','cityList','hotCity'],
       watch: {
         searchCity(newValue,oldValue){
-          console.log(newValue)
+          console.log(newValue)//遍历城市列表
         }
+      },
+      mounted(){
+//        ref   用来获取dom
+        this.scroll = new BScroll(this.$refs.wrapper)
       },
       methods:{
         back(city){
           this.$router.push({path: '/',query:{city:city}})
-          console.log(city)
-          console.log(city)
-          console.log(city)
-          console.log(city)
-          console.log(city)
-          console.log(city)
         },
       }
     }
@@ -86,6 +96,14 @@
 <style lang="stylus">
  @import "~styles/shareFun.styl"
  @import "~styles/varibles.styl"
+ .list
+   position: absolute
+   top: 8.5rem
+   left: 0
+   right: 0
+   bottom: 0
+   overflow: hidden
+
  .headerCity
    background: $bgColor1
    font-size: 1.4rem

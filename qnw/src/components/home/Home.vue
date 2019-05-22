@@ -17,7 +17,7 @@
     import Icon from './child/Icon'
     import Sell from './child/Sell'
     import Weekend from './child/Weekend'
-    import axios from 'axios'
+//    import axios from 'axios'
     export default {
         name:'Home',
         data () {
@@ -50,14 +50,14 @@
                     self.img = reqsuccess.data.list[0].imgUrl
                      console.log(self.img + '---')
                  })*/
-
-                axios.get('/api/index.json').then((reqsuccess) =>{  //箭头函数this指向是最近的this
-//                        console.log(reqsuccess)
-                    this.img = reqsuccess.data.swiperList[1].imgUrl
-                    this.swiperList = reqsuccess.data.swiperList
-                    this.iconList = reqsuccess.data.iconList
-                    this.sellList = reqsuccess.data.sellList
-                    this.weekendList = reqsuccess.data.weekendList
+               // 页面直接import 引入axios.可以直接使用
+//                axios.get('/api/index.json').then((res) =>{  //箭头函数this指向是最近的this
+                this.$axios.get('/api/index.json').then((res) =>{    // 全局引入axios
+                    this.img = res.data.swiperList[1].imgUrl
+                    this.swiperList = res.data.swiperList
+                    this.iconList = res.data.iconList
+                    this.sellList = res.data.sellList
+                    this.weekendList = res.data.weekendList
                 })
 
 //                axios.get('/api/index.json').then(this.abc)  //两种方式获取json  this指向问题

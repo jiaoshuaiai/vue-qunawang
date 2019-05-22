@@ -14,59 +14,18 @@
                     <input id="input" v-model="inputValue" for="serach" class="header-input" type="text" placeholder="请输入城市名或拼音">
             </div>
         </header>
+      <List
+        :searchCity="seaCity"
+        :hotCity="hotCity"
+        :cityList="listAll">
 
-      <!-- <main>
-         <section class="">
-           <p class="headerCity">当前城市</p>
-           <div class="labelDiv">
-             <p class="labelP" @click="back(city)">{{city}}</p>
-           </div>
-         </section>
-         <section class="">
-           <p class="headerCity">热门城市</p>
-           <div class="labelDiv">
-             <p v-for="(item,index) in hotList" :key="index"
-                class="labelP"
-                @click="back(item)">
-               {{item}}
-             </p>
-           </div>
-         </section>
-         <section class=" ">
-           <p class="headerCity">A</p>
-           <div class="labelDiv1">
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海666</p>
-             <p class="labelP1">上海</p>
-             <p class="labelP1">上海</p>
-           </div>
+      </List>
 
-
-           <p class="headerCity">B</p>
-           <div class="labelDiv1">
-             <p class="labelP1">北京</p>
-             <p class="labelP1">北京</p>
-             <p class="labelP1">北京</p>
-             <p class="labelP1">北京</p>
-             <p class="labelP1">北京</p>
-             <p class="labelP1">北京</p>
-             <p class="labelP1">北京</p>
-             <p class="labelP1">北京</p>
-             <p class="labelP1">北京</p>
-           </div>
-         </section>
-       </main>-->
-
-      <List :searchCity="seaCity"></List>
+      <section class="alphabet">
+        <ul class="ul">
+          <li @click="alph" v-for="name in alphabetList">{{name}}</li>
+        </ul>
+      </section>
     </div>
 </template>
 <script>
@@ -80,6 +39,9 @@
               area2:'国际/地区',
               inputValue:'',
               seaCity: '',
+              hotCity:[],
+              listAll:[],
+              alphabetList:[]
           }
       },
       components:{List},
@@ -91,12 +53,36 @@
             }
           }
       },
+      created(){
+        this.getData()
+      },
       methods:{
-          empty () {  //点击label 文字，触发input焦点事件
+        getData(){
+            this.$axios.get('/api/city.json').then((res)=>{
+              let data = res.data;
+              if(data.status == 'success' && data.data){
+                let list = data.data;
+                this.hotCity = list.hotCity;  //直接传参对象初始为空，会报错，要做判空处理
+                this.listAll = list.cityAll;
+
+                let cityAll = list.cityAll;
+                for(let k of cityAll){
+                  this.alphabetList.push(k.alphabet)
+                }
+              }
+            })
+        },
+        empty () {  //点击label 文字，触发input焦点事件
 //            input 直接点击是可以输入文字的，但是点击上面的label文字，是不会触发input焦点的，所以要将焦点手动调用
-            document.querySelector('#input').focus(function(){
-            });
-          }
+          document.querySelector('#input').focus(function(){
+          });
+        },
+        alph(event){
+          console.log('55')
+//            console.log(event)
+          console.log(event.target.innerText)
+          this.seaCity = event.target.innerText;
+        }
       }
 
   }
@@ -147,11 +133,21 @@
      .header-input
       border: none
       outline:none
-      width: 98%
+      width: 96%
       border-radius: .2rem
       line-height: 2.6rem
       padding: 0.4rem 0 0.4rem 0
       text-align: center
       font-size: 1.6rem
+    .alphabet
+      position: absolute
+      top: 20rem
+      right: 0
+    .ul li
+      padding: 1rem
+      list-style: none
+      color: #03A9F4
+      font-size: 1.6rem
+
 
 </style>
