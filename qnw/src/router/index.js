@@ -12,10 +12,10 @@ export default new Router({
       name: 'home',
       component: Home
     },
-      {
-          path:'/city',
-          name:'/City',
-          component:City
-      }
+    {
+        path:'/city',
+        name:'City',
+        component:City
+    }
   ]
 })

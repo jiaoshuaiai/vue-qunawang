@@ -2,7 +2,7 @@
     <div class="main">
         <header class="header">
             <div class="header-one">
-                <router-link :to="{path:'/',query:{city:city}}">
+                <router-link :to="{path:'/',query:{city:cityChilid}}">
                     <p class="iconfont icon">&#xe624;</p>
                 </router-link>
                 <div class="areas">
@@ -11,11 +11,11 @@
                 </div>
             </div>
             <div class="header-two">
-                    <label class="header-label" style="touch-action: none;" for="search" @click="empty">请输入城市名或拼音</label>
-                    <input id="input" v-model="inputValue" for="serach" class="header-input" type="text">
+                    <input id="input" v-model="inputValue" for="serach" class="header-input" type="text" placeholder="请输入城市名或拼音">
             </div>
         </header>
-       <main>
+
+      <!-- <main>
          <section class="">
            <p class="headerCity">当前城市</p>
            <div class="labelDiv">
@@ -63,46 +63,39 @@
              <p class="labelP1">北京</p>
              <p class="labelP1">北京</p>
            </div>
-
-
          </section>
-       </main>
+       </main>-->
 
-
+      <List :searchCity="seaCity"></List>
     </div>
 </template>
 <script>
+  import List from './child/list.vue'
   export default {
       name:"City",
       data () {
           return {
-              city:this.$route.query.city ? this.$route.query.city :  '',
+              cityChilid:this.$route.query.city ? this.$route.query.city :  '',
               area1:'境内',
               area2:'国际/地区',
               inputValue:'',
-              hotList:['上海','北京','广州','深圳','郑州','武汉'],
+              seaCity: '',
           }
       },
+      components:{List},
       watch:{   //监听input 内容，判断是否隐藏提示文字
-          Value(newValue,oldValue){
-              /*console.log(newValue)
-              console.log(oldValue)*/
-              if(newValue){
-                  document.querySelector('.header-label').style.display = 'none'
-              }else{
-                  document.querySelector('.header-label').style.display = 'block'
-              }
+          inputValue(newValue,oldValue){
+            if(newValue != oldValue){
+                this.seaCity = newValue;
+                console.log(this.seaCity);
+            }
           }
       },
       methods:{
-          back(city){
-            this.$router.push({path: '/',query:{city:city}})
-            console.log(city)
-          },
-          empty () {  //点击label 文字，触发input焦点事件   ?????
-            console.log('44')
-              document.querySelector('#input').focus(function(){
-              });
+          empty () {  //点击label 文字，触发input焦点事件
+//            input 直接点击是可以输入文字的，但是点击上面的label文字，是不会触发input焦点的，所以要将焦点手动调用
+            document.querySelector('#input').focus(function(){
+            });
           }
       }
 
@@ -151,46 +144,14 @@
         color: #fff
      .header-two
       center()
-       .header-label
-        position: absolute
-        z-index: 2
-        left: 10rem
-        font-size: 1.4rem
-        top: 5rem
-        color: $color
-       .header-input
-        border: none
-        outline:none
-        width: 98%
-        border-radius: .2rem
-        line-height: 2.6rem
-        padding: 0.4rem 0 0.4rem 0
-        text-align: center
-    .headerCity
-      background: $bgColor1
-      font-size: 1.4rem
-      padding: 0.8rem 0
-      paddingCity()
-    .labelDiv
-      background: white
-      font-size: 1.6rem
-      padding-bottom: 1rem
-      paddingCity()
-    .labelP
-      border: 1px solid #9e9e9ef0
-      width: 25%
-      padding: 0.5rem
+     .header-input
+      border: none
+      outline:none
+      width: 98%
+      border-radius: .2rem
+      line-height: 2.6rem
+      padding: 0.4rem 0 0.4rem 0
       text-align: center
-      border-radius: 5px
-      margin-top: 1rem
-      margin-right: 0.6rem
-      inline()
-    .labelDiv1
-      background: white
       font-size: 1.6rem
-    .labelP1
-      padding: 1rem 0 1.5rem 0.8rem;
-      border-bottom: 0.5px solid #cccccc;
-
 
 </style>
