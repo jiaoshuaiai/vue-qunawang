@@ -74,6 +74,11 @@
         back(city){
           this.$router.push({path: '/',query:{city:city}})
           console.log(city)
+          console.log(city)
+          console.log(city)
+          console.log(city)
+          console.log(city)
+          console.log(city)
         },
       }
     }
