@@ -12,7 +12,8 @@
             </p>
             <router-link :to="{path:'/city',query:{city:city}}">
                 <p class="header-select">
-                    {{city}}
+
+                    <span class="location">{{city}}</span>
                     <span class="iconfont arrow-icon">&#xe6aa;</span>
                 </p>
             </router-link>
@@ -69,6 +70,12 @@
       float:right
       text-align: center
       color: #fff
+      .location
+        display: inline-block
+        text-overflow: ellipsis
+        white-space: nowrap
+        overflow: hidden
+        width: 4rem
       .arrow-icon
         margin-left: -0.4rem
       /*input

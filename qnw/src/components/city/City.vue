@@ -16,6 +16,7 @@
         </header>
       <List
         :searchCity="seaCity"
+        :hahaObj="hahaObj"
         :hotCity="hotCity"
         :cityList="listAll">
 
@@ -23,7 +24,7 @@
 
       <section class="alphabet">
         <ul class="ul">
-          <li @click="alph" v-for="name in alphabetList">{{name}}</li>
+          <li @click="alph" v-for="(name,index) in alphabetList" :key="index">{{name}}</li>
         </ul>
       </section>
     </div>
@@ -38,14 +39,15 @@
               area1:'境内',
               area2:'国际/地区',
               inputValue:'',
-              seaCity: '',
-              hotCity:[],
-              listAll:[],
-              alphabetList:[]
+              hahaObj:{},
+              seaCity: '',   //搜索字段
+              hotCity:[],   //热门城市
+              listAll:[],   // 城市列表
+              alphabetList:[]   //字母表
           }
       },
       components:{List},
-      watch:{   //监听input 内容，判断是否隐藏提示文字
+      watch:{   //监听input 内容，检索城市
           inputValue(newValue,oldValue){
             if(newValue != oldValue){
                 this.seaCity = newValue;
@@ -62,6 +64,7 @@
               let data = res.data;
               if(data.status == 'success' && data.data){
                 let list = data.data;
+                this.hahaObj = list
                 this.hotCity = list.hotCity;  //直接传参对象初始为空，会报错，要做判空处理
                 this.listAll = list.cityAll;
 
@@ -69,6 +72,7 @@
                 for(let k of cityAll){
                   this.alphabetList.push(k.alphabet)
                 }
+                console.log(this.alphabetList)
               }
             })
         },
@@ -141,10 +145,11 @@
       font-size: 1.6rem
     .alphabet
       position: absolute
-      top: 20rem
+      top: 15rem
       right: 0
+      text-align: center
     .ul li
-      padding: 1rem
+      padding: 0.3rem 1rem
       list-style: none
       color: #03A9F4
       font-size: 1.6rem

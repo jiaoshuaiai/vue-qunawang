@@ -7,10 +7,12 @@
           <p class="labelP" @click="back(city)">{{city}}</p>
         </div>
       </section>
+      <!--{{qqqq}}-->
+
       <section>
         <p class="headerCity">热门城市</p>
         <div class="labelDiv">
-          <p v-for="(item,index) in hotCity" :key="index"
+          <p v-for="item in hotCity" :key="item.id"
              class="labelP"
              @click="back(item.name)">
             {{item.name}}
@@ -18,10 +20,10 @@
         </div>
       </section>
       <section>
-        <div class="area" v-for="(item,index) in cityList" :key="index">
+        <div class="area" v-for="item in cityList" :key="item.id">
           <p  class="headerCity">{{item.alphabet}}</p>
           <div class="labelDiv1">
-            <p class="labelP1" v-for="it in item.data">{{it.name}}</p>
+            <p class="labelP1" v-for="it in item.data"  :key="it.id" @click="back(it.name)">{{it.name}}</p>
           </div>
         </div>
         <!--<div class="area">
@@ -56,9 +58,7 @@
             <p class="labelP1">北京</p>
           </div>
         </div>-->
-
       </section>
-
     </main>
   </div>
 </template>
@@ -69,21 +69,18 @@
       data(){
         return{
           city: this.$route.query.city ? this.$route.query.city :  '',
+          qqqq:this.hahaObj ? this.hahaObj.hotCity : '' // jj
         }
       },
       props:{
         searchCity: String,
+        hahaObj: Object,
         hotCity: Array,
         cityList: Array
       },
 //      props:['searchCity','cityList','hotCity'],
-      watch: {
-        searchCity(newValue,oldValue){
-          console.log(newValue)//遍历城市列表
-        }
-      },
       mounted(){
-//        ref   用来获取dom
+//        ref   用来获取dom    初始化scroll 滚动
         this.scroll = new BScroll(this.$refs.wrapper)
       },
       methods:{
