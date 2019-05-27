@@ -10,48 +10,76 @@
                     <p class="area2" v-text="area2"></p>
                 </div>
             </div>
+
             <div class="header-two">
                     <input id="input" v-model="inputValue" for="serach" class="header-input" type="text" placeholder="请输入城市名或拼音">
             </div>
+
         </header>
+
       <List
-        :searchCity="seaCity"
+        :clickCity="clickCity"
         :hahaObj="hahaObj"
+        :searList="searList"
+        :searListLen="searListLen"
+        :inputValue="inputValue"
         :hotCity="hotCity"
         :cityList="listAll">
-
+          城市列表
       </List>
 
-      <section class="alphabet">
-        <ul class="ul">
-          <li @click="alph" v-for="(name,index) in alphabetList" :key="index">{{name}}</li>
-        </ul>
-      </section>
+
+      <Alphabet
+        :alphabetList="alphabetList"
+        :inputValue="inputValue"
+        @cityFun="cityFn">
+        字母表
+      </Alphabet>
+
     </div>
 </template>
 <script>
-  import List from './child/list.vue'
+  import List from './child/List.vue'
+  import Alphabet from './child/Alphabet.vue'
   export default {
       name:"City",
       data () {
           return {
               cityChilid:this.$route.query.city ? this.$route.query.city :  '',
-              area1:'境内',
-              area2:'国际/地区',
-              inputValue:'',
-              hahaObj:{},
-              seaCity: '',   //搜索字段
-              hotCity:[],   //热门城市
-              listAll:[],   // 城市列表
-              alphabetList:[]   //字母表
+              area1: '境内',
+              area2: '国际/地区',
+              inputValue: '',
+              hahaObj: {},
+              searList: [],   //检索对应的显示列表
+              searListLen: 0,   //检索对应的显示列表
+              clickCity: '',   //点击字母列表
+              hotCity: [],   //热门城市
+              listAll: [],   // 城市列表
+              alphabetList: []   //字母表
           }
       },
-      components:{List},
+      components:{List,Alphabet},
       watch:{   //监听input 内容，检索城市
           inputValue(newValue,oldValue){
-            if(newValue != oldValue){
-                this.seaCity = newValue;
-                console.log(this.seaCity);
+            if(newValue){
+              console.log(newValue)
+              let searList = [];
+              let arr = '';
+                for(let item of this.listAll){
+                  arr = item.data;
+                  for(let obj of arr){
+                    if(obj.name.indexOf(newValue.toLowerCase()) != -1 || obj.spell.indexOf(newValue.toLowerCase()) != -1){
+                        searList.push(obj.name);
+                    }
+                  }
+                }
+                this.searList = searList;
+                this.searListLen = this.searList.length;
+                console.log(searList)
+            }else{
+              this.searList = [];
+              this.searListLen = 0;
+
             }
           }
       },
@@ -64,28 +92,19 @@
               let data = res.data;
               if(data.status == 'success' && data.data){
                 let list = data.data;
-                this.hahaObj = list
-                this.hotCity = list.hotCity;  //直接传参对象初始为空，会报错，要做判空处理
+                this.hahaObj = list;
+                this.hotCity = list.hotCity;
                 this.listAll = list.cityAll;
 
                 let cityAll = list.cityAll;
                 for(let k of cityAll){
                   this.alphabetList.push(k.alphabet)
                 }
-                console.log(this.alphabetList)
               }
             })
         },
-        empty () {  //点击label 文字，触发input焦点事件
-//            input 直接点击是可以输入文字的，但是点击上面的label文字，是不会触发input焦点的，所以要将焦点手动调用
-          document.querySelector('#input').focus(function(){
-          });
-        },
-        alph(event){
-          console.log('55')
-//            console.log(event)
-          console.log(event.target.innerText)
-          this.seaCity = event.target.innerText;
+        cityFn(msg){  //父组件-中间组件传参
+          this.clickCity = msg;
         }
       }
 
