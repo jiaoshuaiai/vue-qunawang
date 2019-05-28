@@ -1,5 +1,3 @@
-
-
 <template>
     <div>
         <header>
@@ -25,7 +23,8 @@
         name:'HomeHeader',
         data(){
             return{
-                city:this.$route.query.city ? this.$route.query.city : '城市'
+//                city:this.$route.query.city ? this.$route.query.city : '城市'
+                city:this.$route.params.city ? this.$route.params.city : '城市'
             }
         },
         methods:{

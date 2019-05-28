@@ -3,7 +3,6 @@
     <p  @click="dd">qqqqqqqq</p>
   </div>-->
 
-
   <div>
       <section class="alphabet" ref="alphabet" v-if="!inputValue">
         <ul class="ul">
@@ -32,8 +31,8 @@
       inputValue: String
     },
     updated(){  //初次进入时， alphabetList 为空，只有json接口调用成功之后，才会存在数据，使用 updated数据更新后 生命周期 获取高度，最合适
-      //字母表 A 距离顶部的高度  此处为定位后距离（搜索框）的高度
-      if(!this.inputValue){
+      if(!this.inputValue){       // 输入框有内容，字母表隐藏，不获取 高度
+        //字母表 A 距离顶部的高度  此处为定位后距离（搜索框）的高度
         this.offsetT = this.$refs.alphabet.offsetTop;
       }
     },

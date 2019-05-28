@@ -1,16 +1,13 @@
 <template>
   <div class="list" ref="wrapper" style="color: #333">
     <div>
-      <main class="content" v-if="!inputValue">
+      <main class="content" v-show="!inputValue">
         <section>
           <p class="headerCity">当前城市</p>
           <div class="labelDiv">
             <p class="labelP" @click="back(city)">{{city}}</p>
           </div>
         </section>
-        <!--{{qqqq}}-->
-        <!--{{clickCity}}-->
-
         <section>
           <p class="headerCity">热门城市</p>
           <div class="labelDiv">
@@ -28,36 +25,18 @@
               <p class="labelP1" v-for="it in item.data"  :key="it.id" @click="back(it.name)">{{it.name}}</p>
             </div>
           </div>
-          <!--<div>
-            <p class="headerCity">A</p>
-            <div class="labelDiv1">
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海666</p>
-              <p class="labelP1">上海</p>
-              <p class="labelP1">上海</p>
-            </div>
-          </div>-->
         </section>
       </main>
-      <div class="labelDiv1" v-if="searListLen > 0">
+
+      <div class="labelDiv1" v-show="searListLen > 0">
         <p class="labelP1" v-for="item of searList" @click="back(item)">{{item}}</p>
       </div>
-      <div class="labelDiv1" v-if="inputValue && searListLen == 0">
+
+      <div class="labelDiv1" v-show="inputValue && searListLen == 0">
         <p class="labelP1">没有找到匹配数据</p>
       </div>
 
-
     </div>
-
   </div>
 </template>
 <script>
@@ -85,14 +64,12 @@
         clickCity(newValue,oldValue){
           if(newValue){
             //获取城市列表的 DOM元素
-            console.log(newValue)
-            console.log(this.$refs[newValue])
-            if(newValue){
               const element = this.$refs[newValue][0];
               this.scroll.scrollToElement(element); //滚动到对应的DOM上
-            }
-
           }
+        },
+        inputValue(newValue,oldValue){
+          this.scroll.scrollTo(0,0)   //城市列表滑动后，如果操作了检索框，自动滚动到顶部
         },
       },
       mounted(){
@@ -105,7 +82,8 @@
       },
       methods:{
         back(city){
-          this.$router.push({path: '/',query:{city:city}})
+//          this.$router.push({path: '/',query:{city:city}})     //类似get
+          this.$router.push({name: 'home',params:{city:city}})  //类似post
         }
       }
     }

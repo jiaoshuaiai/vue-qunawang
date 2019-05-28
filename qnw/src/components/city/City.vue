@@ -2,7 +2,7 @@
     <div class="main">
         <header class="header">
             <div class="header-one">
-                <router-link :to="{path:'/',query:{city:cityChilid}}">
+                <router-link :to="{name: 'home',params:{city:city}}">
                     <p class="iconfont icon">&#xe624;</p>
                 </router-link>
                 <div class="areas">
@@ -10,11 +10,14 @@
                     <p class="area2" v-text="area2"></p>
                 </div>
             </div>
-
-            <div class="header-two">
+            <!--<div class="header-two">
                     <input id="input" v-model="inputValue" for="serach" class="header-input" type="text" placeholder="请输入城市名或拼音">
-            </div>
-
+            </div>-->
+            <Search
+              @searFun="searFun"
+              :cityList="listAll">
+              检索框
+            </Search>
         </header>
 
       <List
@@ -28,7 +31,6 @@
           城市列表
       </List>
 
-
       <Alphabet
         :alphabetList="alphabetList"
         :inputValue="inputValue"
@@ -39,27 +41,28 @@
     </div>
 </template>
 <script>
+  import Search from './child/Search.vue'
   import List from './child/List.vue'
   import Alphabet from './child/Alphabet.vue'
   export default {
       name:"City",
       data () {
           return {
-              cityChilid:this.$route.query.city ? this.$route.query.city :  '',
+              city:this.$route.query.city ? this.$route.query.city :  '',
               area1: '境内',
               area2: '国际/地区',
               inputValue: '',
               hahaObj: {},
-              searList: [],   //检索对应的显示列表
-              searListLen: 0,   //检索对应的显示列表
+              searList: [],   //检索对应的城市列表
+              searListLen: 0,   //检索对应的城市列表长度
               clickCity: '',   //点击字母列表
               hotCity: [],   //热门城市
               listAll: [],   // 城市列表
               alphabetList: []   //字母表
           }
       },
-      components:{List,Alphabet},
-      watch:{   //监听input 内容，检索城市
+      components:{Search,List,Alphabet},
+      /*watch:{   //监听input 内容，检索城市
           inputValue(newValue,oldValue){
             if(newValue){
               console.log(newValue)
@@ -79,10 +82,9 @@
             }else{
               this.searList = [];
               this.searListLen = 0;
-
             }
           }
-      },
+      },*/
       created(){
         this.getData()
       },
@@ -103,11 +105,17 @@
               }
             })
         },
-        cityFn(msg){  //父组件-中间组件传参
+        cityFn(msg){  //父组件-中间组件传参   字母表
           this.clickCity = msg;
+        },
+        searFun(msg){  //检索
+          console.log(msg)
+          this.inputValue = msg.value;
+          this.searList = msg.data;
+          this.searListLen = msg.len;
+          console.log(this.searListLen)
         }
       }
-
   }
 </script>
 <style lang="stylus" scoped>
@@ -151,7 +159,7 @@
         width: 10rem
         margin-left: -.4rem
         color: #fff
-     .header-two
+     /*.header-two
       center()
      .header-input
       border: none
@@ -161,8 +169,8 @@
       line-height: 2.6rem
       padding: 0.4rem 0 0.4rem 0
       text-align: center
-      font-size: 1.6rem
-    .alphabet
+      font-size: 1.6rem*/
+    /*.alphabet
       position: absolute
       top: 15rem
       right: 0
@@ -171,7 +179,7 @@
       padding: 0.3rem 1rem
       list-style: none
       color: #03A9F4
-      font-size: 1.6rem
+      font-size: 1.6rem*/
 
 
 </style>
