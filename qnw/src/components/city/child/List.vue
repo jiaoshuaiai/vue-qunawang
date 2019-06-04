@@ -5,7 +5,8 @@
         <section>
           <p class="headerCity">当前城市</p>
           <div class="labelDiv">
-            <p class="labelP" @click="back(city)">{{city}}</p>
+            <!--<p class="labelP" @click="back(city)">{{city}}</p>-->
+            <p class="labelP" @click="back(morenCity)">{{morenCity}}</p>
           </div>
         </section>
         <section>
@@ -42,13 +43,20 @@
 <script>
     import VueEvent from './City'  //兄弟组件实例传参
     import BScroll from 'better-scroll'
+    import {mapState,mapMutations} from 'vuex'
     export default{
       name:'list',
       data(){
         return{
-          city: this.$route.query.city ? this.$route.query.city :  '',
+//          city: this.$route.query.city ? this.$route.query.city :  '',
+//          city: this.$store.state.city ?  this.$store.state.city : '',  // 获取state 中数据
           qqqq:this.hahaObj ? this.hahaObj.hotCity : '' // jj
         }
+      },
+      computed: {
+        ...mapState({    //对象形式
+          morenCity: 'city'
+        })
       },
       props:{  //定义类型
         inputValue: String,
@@ -83,8 +91,14 @@
       methods:{
         back(city){
 //          this.$router.push({path: '/',query:{city:city}})     //类似get
-          this.$router.push({name: 'home',params:{city:city}})  //类似post
-        }
+//          this.$router.push({name: 'home',params:{city:city}})  //类似post
+
+//          this.$store.dispatch('acCity',city)   //异步   此处可以直接同步，
+//          this.$store.commit('muCity',city)  //同步
+            this.muCity(city)
+          this.$router.push({name: 'home'})    //类似post
+        },
+        ...mapMutations(['muCity'])  //将mutations中 的muCity() 映射为组件的 muCity方法，就可以直接使用 改变state中的 city
       }
     }
 </script>

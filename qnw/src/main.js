@@ -8,6 +8,7 @@ import fastClick from 'fastclick'    //移动端点击300ms 延迟问题
 import VueAwesomeSwiper from 'vue-awesome-swiper'   //swiprer 插件
 import BScroll from 'better-scroll'    //触摸滚动插件
 
+import store from './store'
 
 import '@/assets/styles/reset.css'
 import './assets/styles/1px.less'
@@ -27,6 +28,7 @@ Vue.prototype.$axios = axios
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
+    store,
     router,   //等同 router:router.es6写法。路由配置
     components: { App },  // es6写法，键值相同，写一个就可以。等同{App : App}。
     template: '<App/>'       //渲染局部组件App。导入进来的App

@@ -8,9 +8,9 @@
 
                 <input id="input" style="border: none;outline: none" type="text" placeholder="输入城市/景点/游玩主题">
             </p>
-            <router-link :to="{path:'/city',query:{city:city}}">
+            <!--<router-link :to="{path:'/city',query:{city:city}}">-->
+            <router-link to="/city">
                 <p class="header-select">
-
                     <span class="location">{{city}}</span>
                     <span class="iconfont arrow-icon">&#xe6aa;</span>
                 </p>
@@ -19,14 +19,25 @@
     </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
     export default {
         name:'HomeHeader',
         data(){
             return{
 //                city:this.$route.query.city ? this.$route.query.city : '城市'
-                city:this.$route.params.city ? this.$route.params.city : '城市'
+//                city:this.$route.params.city ? this.$route.params.city : '城市'
+//                city:this.$store.getters.getCityLen ?  this.$store.getters.getCityLen : ''   城市长度
             }
         },
+        computed: {
+          ...mapState(['city'])   //使用mapState 将state 中的city 直接映射到组件中，组件就可以直接使用city
+        },
+        /*computed:{   //不用定义 city，直接使用
+          city(){
+            console.log(this.$store.getters.getCity)
+            return this.$store.getters.getCity
+          }
+        },*/
         methods:{
              search(){
 //                 this.placeholder = ''
@@ -65,16 +76,17 @@
      .header-input span
       font-size: 1.2rem
      .header-select
-      width: 6rem
+      min-width: 6rem
+      padding: 0.5rem
       float:right
       text-align: center
       color: #fff
-      .location
+      /*.location
         display: inline-block
         text-overflow: ellipsis
         white-space: nowrap
         overflow: hidden
-        width: 4rem
+        width: 4rem*/
       .arrow-icon
         margin-left: -0.4rem
       /*input

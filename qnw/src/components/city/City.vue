@@ -2,7 +2,8 @@
     <div class="main">
         <header class="header">
             <div class="header-one">
-                <router-link :to="{name: 'home',params:{city:city}}">
+                <!--<router-link :to="{name: 'home',params:{city:city}}">-->
+                <router-link :to="{name: 'home'}">
                     <p class="iconfont icon">&#xe624;</p>
                 </router-link>
                 <div class="areas">
@@ -48,7 +49,7 @@
       name:"City",
       data () {
           return {
-              city:this.$route.query.city ? this.$route.query.city :  '',
+//              city:this.$route.query.city ? this.$route.query.city :  '',
               area1: '境内',
               area2: '国际/地区',
               inputValue: '',
@@ -62,31 +63,8 @@
           }
       },
       components:{Search,List,Alphabet},
-      /*watch:{   //监听input 内容，检索城市
-          inputValue(newValue,oldValue){
-            if(newValue){
-              console.log(newValue)
-              let searList = [];
-              let arr = '';
-                for(let item of this.listAll){
-                  arr = item.data;
-                  for(let obj of arr){
-                    if(obj.name.indexOf(newValue.toLowerCase()) != -1 || obj.spell.indexOf(newValue.toLowerCase()) != -1){
-                        searList.push(obj.name);
-                    }
-                  }
-                }
-                this.searList = searList;
-                this.searListLen = this.searList.length;
-                console.log(searList)
-            }else{
-              this.searList = [];
-              this.searListLen = 0;
-            }
-          }
-      },*/
       created(){
-        this.getData()
+        this.getData();
       },
       methods:{
         getData(){
@@ -159,27 +137,5 @@
         width: 10rem
         margin-left: -.4rem
         color: #fff
-     /*.header-two
-      center()
-     .header-input
-      border: none
-      outline:none
-      width: 96%
-      border-radius: .2rem
-      line-height: 2.6rem
-      padding: 0.4rem 0 0.4rem 0
-      text-align: center
-      font-size: 1.6rem*/
-    /*.alphabet
-      position: absolute
-      top: 15rem
-      right: 0
-      text-align: center
-    .ul li
-      padding: 0.3rem 1rem
-      list-style: none
-      color: #03A9F4
-      font-size: 1.6rem*/
-
 
 </style>
